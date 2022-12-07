@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import color from './color.ts';
 import { formatDuration } from './formatDuration.ts';
 
 export const printCypressReport = (cypressReport) => {
