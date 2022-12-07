@@ -9,3 +9,9 @@ Which test suite or case run how long? WIP!
 ```bash
 deno run --allow-net=gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com analyze-ci-job.ts
 ```
+
+## Get latest builds
+
+```bash
+deno run --allow-net=prow.ci.openshift.org latest-builds.ts
+```

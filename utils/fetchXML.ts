@@ -1,4 +1,4 @@
-import { parse } from "https://deno.land/x/xml/mod.ts";
+import * as xml from "https://deno.land/x/xml@2.0.4/mod.ts";
 import { getBaseURL } from './baseURL.ts';
 
 export const fetchXML = async (file: string): Promise<any> => {
@@ -14,5 +14,5 @@ export const fetchXML = async (file: string): Promise<any> => {
   //   return value;
   // } }));
 
-  return parse(text);
+  return xml.parse(text);
 }
