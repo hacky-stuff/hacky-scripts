@@ -11,7 +11,10 @@ export const printCypressReport = (cypressReport) => {
   );
   cypressReport.results.forEach((result) => {
     const resultDuration = result.suites.reduce((acc, suite) => {
-      const suiteDuration = suite.tests.reduce((acc, test) => acc + test.duration, 0);
+      const suiteDuration = suite.tests.reduce(
+        (acc, test) => acc + test.duration,
+        0,
+      );
       return acc + suiteDuration;
     }, 0);
     console.log(
@@ -20,7 +23,10 @@ export const printCypressReport = (cypressReport) => {
     );
 
     result.suites.forEach((suite) => {
-      const suiteDuration = suite.tests.reduce((acc, test) => acc + test.duration, 0);
+      const suiteDuration = suite.tests.reduce(
+        (acc, test) => acc + test.duration,
+        0,
+      );
       console.log(
         `      ${suite.title}`,
         formatDuration(suiteDuration / 1000),
@@ -34,4 +40,4 @@ export const printCypressReport = (cypressReport) => {
       });
     });
   });
-}
+};

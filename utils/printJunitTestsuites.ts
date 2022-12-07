@@ -1,7 +1,8 @@
 import color from './color.ts';
 import { formatDuration } from './formatDuration.ts';
 
-const shouldBeAnArray = (value) => !value ? [] : Array.isArray(value) ? value : [value];
+const shouldBeAnArray = (value) =>
+  !value ? [] : Array.isArray(value) ? value : [value];
 
 export const printJunitTestsuites = (xmlRoot) => {
   // TODO protractor time / 3600
@@ -27,4 +28,4 @@ export const printJunitTestsuites = (xmlRoot) => {
       );
     });
   });
-}
+};
