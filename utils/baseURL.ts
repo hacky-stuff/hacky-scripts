@@ -1,4 +1,3 @@
-
 let baseURL: string;
 
 export const setBaseURL = (newBaseURL: string) => baseURL = newBaseURL;

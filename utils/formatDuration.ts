@@ -14,4 +14,4 @@ export const formatDuration = (duration: number) => {
   }
   const s = Math.round(duration);
   return color.green(`${s}s`);
-}
+};
