@@ -1,25 +1,29 @@
-import chalk from 'chalk';
+import color from './color.ts';
 import { formatDuration } from './formatDuration.ts';
 
-export const printJunitTestsuites = (testsuitesRoot: { time: number, testsuite: any[] }) => {
+const shouldBeAnArray = (value) => !value ? [] : Array.isArray(value) ? value : [value];
+
+export const printJunitTestsuites = (xmlRoot) => {
   // TODO protractor time / 3600
   console.log(
     `  Testsuites overall`,
-    chalk.red(formatDuration(testsuitesRoot.time)),
+    color.red(formatDuration(xmlRoot.testsuites.time)),
   );
 
-  testsuitesRoot.testsuite.forEach((testsuite, testsuiteIndex) => {
+  const testsuites = shouldBeAnArray(xmlRoot.testsuites.testsuite);
+  testsuites.forEach((testsuite, testsuiteIndex) => {
     console.log(
       `    Testsuite #${testsuiteIndex + 1}`,
-      chalk.blue(testsuite.name),
-      chalk.red(formatDuration(testsuite.time)),
+      color.blue(testsuite['@name']),
+      color.red(formatDuration(testsuite['@time'])),
     );
 
-    testsuite.testcase?.forEach((testcase, testcaseIndex) => {
+    const testcases = shouldBeAnArray(testsuite.testcase);
+    testcases.forEach((testcase, testcaseIndex) => {
       console.log(
         `      #${testcaseIndex + 1}`,
-        chalk.blue(testcase.name),
-        chalk.red(formatDuration(testcase.time)),
+        color.blue(testcase['@name']),
+        color.red(formatDuration(testcase['@time'])),
       );
     });
   });

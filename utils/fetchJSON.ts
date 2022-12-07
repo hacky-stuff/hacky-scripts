@@ -1,5 +1,4 @@
-import fetch from 'node-fetch';
-import { getBaseURL } from "./baseURL.ts";
+import { getBaseURL } from './baseURL.ts';
 
 export const fetchJSON = async (file: string): Promise<any> => {
   const response = await fetch(`${getBaseURL()}${file}`)
