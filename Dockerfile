@@ -1,3 +1,9 @@
 FROM docker.io/denoland/deno:alpine
 
-ADD deno.json deno.lock *.ts utils vendor
+USER deno
+
+WORKDIR /app
+
+COPY deno.json deno.lock .
+COPY vendor vendor
+COPY . .
