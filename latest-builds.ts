@@ -81,7 +81,6 @@ const builds: Build[] = [];
 for (let i = 0; i < 10; i++) {
   console.log(`Fetching page ${i + 1} with buildId`, buildId);
   const paginatedBuilds = await extractPaginatedBuilds(job, buildId);
-  console.log(paginatedBuilds.builds[0]);
   buildId = paginatedBuilds.olderBuildId;
   builds.push(...paginatedBuilds.builds);
 }
