@@ -3,6 +3,10 @@ import { fetchText } from './utils/fetchText.ts';
 import color from './utils/color.ts';
 import { formatDuration } from './utils/formatDuration.ts';
 
+const job = Deno.args[0] || 'pull-ci-openshift-console-master-e2e-gcp-console';
+
+console.log('Job:', color.blue(job));
+
 setBaseURL(
   'https://prow.ci.openshift.org/job-history/gs/origin-ci-test/pr-logs/directory/',
 );
@@ -74,15 +78,20 @@ const extractPaginatedBuilds = async (
   };
 };
 
-const job = 'pull-ci-openshift-console-master-e2e-gcp-console';
-let buildId;
+let buildId = '';
 const builds: Build[] = [];
 
 for (let i = 0; i < 10; i++) {
-  console.log(`Fetching page ${i + 1} with buildId`, buildId);
-  const paginatedBuilds = await extractPaginatedBuilds(job, buildId);
-  buildId = paginatedBuilds.olderBuildId;
+  console.log(`Fetching page ${i + 1} with buildId`, color.blue(buildId));
+  const paginatedBuilds: PaginatedBuilds = await extractPaginatedBuilds(
+    job,
+    buildId,
+  );
   builds.push(...paginatedBuilds.builds);
+  if (!paginatedBuilds.olderBuildId) {
+    break;
+  }
+  buildId = paginatedBuilds.olderBuildId;
 }
 
 const formatResult = (result: BuildResult) => {
@@ -121,12 +130,12 @@ const failureRate = Math.round(failure / (success + failure) * 100) / 100;
 console.log('');
 console.log(
   color.green(
-    `Success rate: ${successRate} % (${success} / ${success + failure})`,
+    `Success rate: ${successRate * 100} % (${success} / ${success + failure})`,
   ),
 );
 console.log(
   color.red(
-    `Failure rate: ${failureRate} % (${failure} / ${success + failure})`,
+    `Failure rate: ${failureRate * 100} % (${failure} / ${success + failure})`,
   ),
 );
 if (aborted > 0) {

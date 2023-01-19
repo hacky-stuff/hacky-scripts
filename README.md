@@ -14,4 +14,8 @@ deno run --allow-net=gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com analyze-ci-job.
 
 ```bash
 deno run --allow-net=prow.ci.openshift.org latest-builds.ts
+
+deno run --allow-net=prow.ci.openshift.org latest-builds.ts pull-ci-openshift-console-master-e2e-gcp-console
+
+deno run --allow-net=prow.ci.openshift.org latest-builds.ts pull-ci-openshift-console-operator-master-e2e-aws-operator
 ```
